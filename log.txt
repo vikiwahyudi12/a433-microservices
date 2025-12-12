@@ -1,0 +1,51 @@
+item-app  | 
+item-app  | > docker-software-delivery@1.0.0 start /app
+item-app  | > node ./bin/www
+item-app  | 
+item-app  | NODE_ENV: production
+item-app  | Connected to database
+item-app  | [0mGET / [32m200 [0m200.626 ms - 785[0m
+item-app  | [0mGET /javascripts/dist/dist.min.js [32m200 [0m14.885 ms - 186999[0m
+item-app  | [0mGET /stylesheets/style.css [32m200 [0m28.298 ms - 519[0m
+item-app  | [0mGET /javascripts/dist/dist.min.js [32m200 [0m6.663 ms - 186999[0m
+item-app  | [0mGET /api [32m200 [0m4.624 ms - 2[0m
+item-app  | [0mGET /favicon.ico [33m404 [0m17.030 ms - 270[0m
+item-app  | [0mPOST /api [32m201 [0m44.032 ms - 51[0m
+item-db   | 2025-12-12T09:07:17.307+0000 I CONTROL  [initandlisten] MongoDB starting : pid=1 port=27017 dbpath=/data/db 64-bit host=c054104e8f06
+item-db   | 2025-12-12T09:07:17.312+0000 I CONTROL  [initandlisten] db version v3.6.23
+item-db   | 2025-12-12T09:07:17.312+0000 I CONTROL  [initandlisten] git version: d352e6a4764659e0d0350ce77279de3c1f243e5c
+item-db   | 2025-12-12T09:07:17.312+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.2g  1 Mar 2016
+item-db   | 2025-12-12T09:07:17.312+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+item-db   | 2025-12-12T09:07:17.313+0000 I CONTROL  [initandlisten] modules: none
+item-db   | 2025-12-12T09:07:17.313+0000 I CONTROL  [initandlisten] build environment:
+item-db   | 2025-12-12T09:07:17.313+0000 I CONTROL  [initandlisten]     distmod: ubuntu1604
+item-db   | 2025-12-12T09:07:17.313+0000 I CONTROL  [initandlisten]     distarch: aarch64
+item-db   | 2025-12-12T09:07:17.313+0000 I CONTROL  [initandlisten]     target_arch: aarch64
+item-db   | 2025-12-12T09:07:17.313+0000 I CONTROL  [initandlisten] options: { net: { bindIpAll: true } }
+item-db   | 2025-12-12T09:07:17.331+0000 I STORAGE  [initandlisten] 
+item-db   | 2025-12-12T09:07:17.331+0000 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+item-db   | 2025-12-12T09:07:17.331+0000 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+item-db   | 2025-12-12T09:07:17.331+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=1447M,cache_overflow=(file_max=0M),session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),compatibility=(release="3.0",require_max="3.0"),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
+item-db   | 2025-12-12T09:07:17.594+0000 I STORAGE  [initandlisten] WiredTiger message [1765530437:593507][1:0xffff93c32000], txn-recover: Set global recovery timestamp: 0
+item-db   | 2025-12-12T09:07:17.680+0000 I CONTROL  [initandlisten] 
+item-db   | 2025-12-12T09:07:17.680+0000 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+item-db   | 2025-12-12T09:07:17.680+0000 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+item-db   | 2025-12-12T09:07:17.680+0000 I CONTROL  [initandlisten] 
+item-db   | 2025-12-12T09:07:17.682+0000 I CONTROL  [initandlisten] 
+item-db   | 2025-12-12T09:07:17.682+0000 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is 'always'.
+item-db   | 2025-12-12T09:07:17.682+0000 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
+item-db   | 2025-12-12T09:07:17.682+0000 I CONTROL  [initandlisten] 
+item-db   | 2025-12-12T09:07:17.701+0000 I STORAGE  [initandlisten] createCollection: admin.system.version with provided UUID: 16cc0e7d-aeff-4120-97e5-a26a8b5fca9f
+item-db   | 2025-12-12T09:07:17.717+0000 I COMMAND  [initandlisten] setting featureCompatibilityVersion to 3.6
+item-db   | 2025-12-12T09:07:17.726+0000 I STORAGE  [initandlisten] createCollection: local.startup_log with generated UUID: f340389a-3a56-4c28-8691-b730272fbcfd
+item-db   | 2025-12-12T09:07:17.742+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/data/db/diagnostic.data'
+item-db   | 2025-12-12T09:07:17.745+0000 I NETWORK  [initandlisten] listening via socket bound to 0.0.0.0
+item-db   | 2025-12-12T09:07:17.745+0000 I NETWORK  [initandlisten] listening via socket bound to /tmp/mongodb-27017.sock
+item-db   | 2025-12-12T09:07:17.745+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+item-db   | 2025-12-12T09:07:17.745+0000 I STORAGE  [LogicalSessionCacheRefresh] createCollection: config.system.sessions with generated UUID: 5604d4f3-c1fd-4614-9278-9fc8dfa4a007
+item-db   | 2025-12-12T09:07:17.769+0000 I INDEX    [LogicalSessionCacheRefresh] build index on: config.system.sessions properties: { v: 2, key: { lastUse: 1 }, name: "lsidTTLIndex", ns: "config.system.sessions", expireAfterSeconds: 1800 }
+item-db   | 2025-12-12T09:07:17.769+0000 I INDEX    [LogicalSessionCacheRefresh] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+item-db   | 2025-12-12T09:07:17.770+0000 I INDEX    [LogicalSessionCacheRefresh] build index done.  scanned 0 total records. 0 secs
+item-db   | 2025-12-12T09:07:18.374+0000 I NETWORK  [listener] connection accepted from 172.19.0.3:59580 #1 (1 connection now open)
+item-db   | 2025-12-12T09:07:18.378+0000 I NETWORK  [conn1] received client metadata from 172.19.0.3:59580 conn1: { driver: { name: "nodejs", version: "2.2.36" }, os: { type: "Linux", name: "linux", architecture: "arm64", version: "6.10.14-linuxkit" }, platform: "Node.js v14.21.3, LE, mongodb-core: 2.1.20" }
+item-db   | 2025-12-12T09:08:22.277+0000 I STORAGE  [conn1] createCollection: accumulator.documents with generated UUID: 22a4b452-0eea-410f-8747-e08c43428ca6

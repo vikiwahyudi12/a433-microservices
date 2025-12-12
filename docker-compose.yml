@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  item-db:
+    image: mongo:3
+    container_name: item-db
+    restart: always
+    volumes:
+      - app-db:/data/db
+
+  item-app:
+    image: ghcr.io/vikiwahyudi12/item-app:latest
+    container_name: item-app
+    restart: always
+    ports:
+      - "80:8080"
+    depends_on:
+      - item-db
+      
+volumes:
+  app-db:
