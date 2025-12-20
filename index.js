@@ -1,31 +1,38 @@
-require('dotenv').config()
-
+require('dotenv').config();
 const express = require("express");
 const app = express();
-
-const bp = require("body-parser");
-
 const amqp = require("amqplib");
-const amqpServer = process.env.AMQP_URL;
+
+// Config RabbitMQ
+const amqpServer = process.env.AMQP_URL || 'amqp://localhost';
 var channel, connection;
 
 connectToQueue();
 
 async function connectToQueue() {
     try {
+        // Connect ke RabbitMQ
         connection = await amqp.connect(amqpServer);
         channel = await connection.createChannel();
+        
+        // Pastikan queue 'order' ada
         await channel.assertQueue("order");
+        console.log("Shipping service listening...");
+
+        // Consume pesan masuk
         channel.consume("order", data => {
-            console.log(`Order received: ${Buffer.from(data.content)}`);
-            console.log("** Will be shipped soon! **\n")
+            console.log(`Order received: ${data.content.toString()}`);
+            console.log("** Will be shipped soon! **\n");
+            
+            // Ack biar pesan dihapus dari queue
             channel.ack(data);
         });
     } catch (ex) {
-        console.error(ex);
+        console.error("RabbitMQ Error:", ex);
     }
 }
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server running at ${process.env.PORT}`);
+// Keep container running
+app.listen(process.env.PORT || 3001, () => {
+    console.log(`Shipping Service running at ${process.env.PORT || 3001}`);
 });
