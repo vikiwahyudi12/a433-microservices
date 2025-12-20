@@ -1,73 +1,70 @@
 require('dotenv').config();
 
-// Setup express app
+// Init Express
 const express = require("express");
 const app = express();
 
-// Pake body-parser buat parsing JSON body
+// Body-parser middleware
 const bp = require("body-parser");
 app.use(bp.json());
 
-// Load library RabbitMQ
+// Library RabbitMQ
 const amqp = require("amqplib");
 
-// URL RabbitMQ, ambil dari env atau default localhost
+// Config RabbitMQ
 const amqpServer = process.env.AMQP_URL || 'amqp://localhost';
-
 var channel, connection;
 
-// Langsung konek ke queue pas aplikasi jalan
+// Langsung konek
 connectToQueue();
 
 async function connectToQueue() {
     try {
-        // Bikin koneksi & channel ke RabbitMQ
+        // Buat koneksi & channel
         connection = await amqp.connect(amqpServer);
         channel = await connection.createChannel();
         
-        // Pastikan queue 'order' ada. Durable true biar queue ga ilang kalo restart
+        // Pastikan queue 'order' ada
         const queue = "order";
         await channel.assertQueue(queue, { durable: true });
         
-        console.log("Connected to the queue!");
+        console.log("Terhubung ke queue!");
     } catch (ex) {
-        console.error("Error connecting to RabbitMQ:", ex);
+        console.error("Error RabbitMQ:", ex);
     }
 }
 
-// Fungsi buat kirim data ke RabbitMQ
+// Helper kirim pesan
 const createOrder = async order => {
     const queue = "order";
-    
-    // Kirim data ke queue dalam bentuk Buffer string
+    // Kirim ke queue sebagai Buffer
     await channel.sendToQueue(queue, Buffer.from(JSON.stringify(order)));
-    
-    console.log("Order succesfully created and sent to queue!");
+    console.log("Order dikirim ke queue!");
 };
 
 // Endpoint POST /order
 app.post("/order", (req, res) => {
-    // Ambil data order dari request body
+    // Ambil data
     const { order } = req.body;
     
-    // Cek ada datanya apa ngga
+    // Validasi
     if (!order) {
-        return res.status(400).json({ message: "Data order tidak ditemukan" });
+        return res.status(400).json({ message: "Data order kosong" });
     }
 
     // Kirim ke RabbitMQ
     createOrder(order);
     
-    // Balikin response sukses ke client
+    // Response
     res.json({
-        message: "Order received",
+        message: "Order diterima",
         data: order
     });
 });
 
-// Handle graceful shutdown (misal pas di Ctrl+C) biar koneksi ditutup rapi
+// Graceful shutdown
 process.once('SIGINT', async () => { 
-    console.log('got sigint, closing connection');
+    console.log('Tutup koneksi...');
     if (channel) await channel.close();
     if (connection) await connection.close(); 
     process.exit(0);
@@ -76,5 +73,5 @@ process.once('SIGINT', async () => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log(`Server running at ${PORT}`);
+    console.log(`Server jalan di port ${PORT}`);
 });

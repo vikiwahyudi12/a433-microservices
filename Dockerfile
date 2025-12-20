@@ -1,20 +1,18 @@
-# Menggunakan base image Node.js versi 14 varian alpine
+# Base image Node.js alpine
 FROM node:14-alpine
 
-# Menentukan direktori kerja utama di dalam container
+# Set working directory
 WORKDIR /app
 
-# Menyalin file package.json dan package-lock.json terlebih dahulu
+# Copy package & install dependencies
 COPY package*.json ./
-
-# Menginstall seluruh dependency
 RUN npm install
 
-# Menyalin seluruh sisa kode sumber aplikasi
+# Copy sisa source code
 COPY . .
 
-# Memberi informasi port 3000
+# Expose port
 EXPOSE 3000
 
-# Perintah default
+# Start app
 CMD [ "npm", "start" ]
